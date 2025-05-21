@@ -4,7 +4,12 @@ import ProductFilters from "@/src/components/products/Filter";
 import SearchProduct from "@/src/components/products/Search";
 
 export const metadata = {
-  title: "Products",
+  title:"Products"
+  // {
+
+  //   default: "Products", or simply title : "products" vanda pani  products chai title ma append vayera dekhauxa like ebazar|products
+  //   // if default ko satta absolute garyau vane only prodcuts matra aauxa title ma 
+  // }
 };
 
 async function ProductsPage({ searchParams }) {

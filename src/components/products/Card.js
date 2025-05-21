@@ -7,7 +7,7 @@ import AddToCart from "./AddToCart";
 function ProductCard({ product }) {
   return (
     <div className="w-full h-full rounded-xl shadow-md pb-6 grid grid-rows-[auto_1fr_auto] bg-white dark:bg-slate-800 dark:text-white">
-      <Link href={`/products/${product._id}`}>
+      <Link href={`/products/${product.id}`}>
         <div className="flex justify-center min-h-30">
           <Image
             height={500}

@@ -12,6 +12,10 @@ async function getById(params) {
 
   return response?.data;
 }
+// note [id] yo dyamic route in next js ma jaile params as a props aauxa hai 
+// metadata is only used in server components not in client components hai
+// static ra dynamic dubai metadata eutai page ma handle garna mildaina next js 15 ma
+
 
 export const generateMetadata = async ({ params }) => {
   const product = await getById(params);
@@ -20,9 +24,9 @@ export const generateMetadata = async ({ params }) => {
     title: {
       absolute:product.name
     },
-          // note: absolute nagarda E-bazar|Product name dekhaux but absolute garda chai porudct ko name matra dekhauxa mathy title ma
+          // note: absolute garda E-bazar|Product name dekhaux but absolute nagarda chai porudct ko name matra dekhauxa mathy title ma
     keywords: `${product?.brand},${product.category}`, // keywords is for seo
-    // <meta name="keywords" content="Apple,Smartphones"> yesari rakhdinxu head section ma just for seo
+    // <meta name="keywords" content="Apple,Smartphones"> yesari rakhdinxa yo code le  head section ma just for seo
   };
 };
 

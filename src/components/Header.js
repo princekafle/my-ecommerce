@@ -55,7 +55,7 @@ function Header() {
               <Link href={CART_ROUTE}>
                 <HiOutlineShoppingCart />
               </Link>
-              <div class="absolute inline-flex items-center justify-center w-4 h-4 text-[0.6rem] text-white bg-red-500 rounded-full top-0 right-0">
+                   <div className="absolute inline-flex items-center justify-center w-4 h-4 text-[0.6rem] text-white bg-red-500 rounded-full top-0 right-0">
                 {products.length}
               </div>
             </div>

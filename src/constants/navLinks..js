@@ -1,3 +1,5 @@
+import { ORDERS_ROUTE } from "./routes";
+
 const navLinks = [
   {
     route: "/",
@@ -13,6 +15,11 @@ const navLinks = [
     route: "/products",
     label: "Products",
     isAuth: false,
+  },
+   {
+    route: ORDERS_ROUTE,
+    label: "Orders",
+    isAuth: true,
   },
   {
     route: "/news",
