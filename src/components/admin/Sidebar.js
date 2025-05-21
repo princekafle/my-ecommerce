@@ -4,23 +4,28 @@ import { GiPieChart } from "react-icons/gi";
 import { FaUsersCog } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import { MdOutlineLocalGroceryStore } from "react-icons/md";
+import {
+  DASHBOARD_ROUTE,
+  PRODUCT_MANAGEMENT_ROUTE,
+  USER_MANAGEMENT_ROUTE,
+} from "@/src/constants/routes";
 
 const sidebarMenu = [
   {
     label: "Dashboard",
-    route: "/dashboard",
+    route: DASHBOARD_ROUTE,
     icon: <GiPieChart className="w-5 h-5 text-gray-500 dark:text-white" />,
   },
   {
     label: "Product Management",
-    route: "/product-management",
+    route: PRODUCT_MANAGEMENT_ROUTE,
     icon: (
       <MdOutlineLocalGroceryStore className="w-5 h-5 text-gray-500 dark:text-white" />
     ),
   },
   {
     label: "User Management",
-    route: "/user-management",
+    route: USER_MANAGEMENT_ROUTE,
     icon: <FaUsersCog className="w-5 h-5 text-gray-500 dark:text-white" />,
   },
 ];
@@ -33,7 +38,7 @@ function AdminSidebar() {
       <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-900">
         <ul className="space-y-2 font-medium">
           {sidebarMenu.map((menu, index) => {
-            const isActive = pathname == menu.route;
+            const isActive = pathname == menu.route || pathname.startsWith(menu.route);
 
             return (
               <li key={index}>
@@ -41,7 +46,7 @@ function AdminSidebar() {
                   href={menu.route}
                   className={`${
                     isActive ? "bg-gray-200 dark:bg-gray-700" : ""
-                  } flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group`}
+                  } flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600 group`}
                 >
                   {menu.icon}
                   <span className="ms-3">{menu.label}</span>

@@ -2,13 +2,19 @@ import Link from "next/link";
 import React from "react";
 import { IoLogOutOutline } from "react-icons/io5";
 import { logoutUser } from "@/src/redux/auth/authSlice";
-import {useDispatch} from "react-redux"
-import { allowedAdminRoles } from "@/src/helpers/auth.js";
+import { useDispatch } from "react-redux";
+import { allowedAdminRoles } from "@/src/helpers/auth";
+import { DASHBOARD_ROUTE } from "@/src/constants/routes";
 
 function AuthUserPopup({ user, setShowPopup }) {
   const dispatch = useDispatch();
 
   const isAllowed = allowedAdminRoles(user?.roles);
+
+  function logout() {
+    dispatch(logoutUser());
+    localStorage.removeItem("authToken");
+  }
 
   return (
     <div
@@ -18,7 +24,7 @@ function AuthUserPopup({ user, setShowPopup }) {
       <h4 className="font-medium text-lg">Hi! {user.name}</h4>
       {isAllowed && (
         <Link
-          href="/dashboard"
+          href={DASHBOARD_ROUTE}
           className="bg-gray-200 block text-black my-2 py-1 px-4 rounded-md w-full hover:bg-gray-300"
         >
           Dashboard
@@ -31,7 +37,7 @@ function AuthUserPopup({ user, setShowPopup }) {
         Profile
       </Link>
       <button
-        onClick={() => dispatch(logoutUser())}
+        onClick={logout}
         className="bg-primary text-white py-1 px-4 rounded-md w-full flex items-center justify-between hover:opacity-90"
       >
         <span>Logout</span>

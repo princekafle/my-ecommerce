@@ -1,4 +1,5 @@
 import { getCategories, getProductById } from "@/src/api/products.js";
+import BackButton from "@/src/app/products/[productId]/_components/BackButton";
 import ProductForm from "@/src/components/products/Form";
 
 async function EditProductPage({ params }) {
@@ -12,14 +13,17 @@ async function EditProductPage({ params }) {
   const categoriesResponse = await getCategories();
 
   return (
-    <section>
-      <div className="py-5 px-4 mx-auto max-w-2xl lg:py-8">
+    <section className="py-3">
+      <BackButton />
+
+      <div className="py-5 px-4 mx-auto max-w-2xl">
         <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
           Edit <span className="italic">{response.data?.name}</span>
         </h2>
         <ProductForm
-          product={response?.data}
-          categories={categoriesResponse?.data}
+          id={id}
+          product={response.data}
+          categories={categoriesResponse.data}
         />
       </div>
     </section>

@@ -1,4 +1,4 @@
-import { ToastContainer } from "react-toastify";
+
 import hero from "@/src/assets/images/auth-hero.png";
 import bg from "@/src/assets/images/auth-bg.png";
 import Image from "next/image";
@@ -23,9 +23,7 @@ function AuthLayout({ children }) {
           className="h-full object-cover w-auto rounded-r-xl hidden md:block"
         />
       </div>
-      <ToastContainer />
     </section>
   );
 }
-
 export default AuthLayout;

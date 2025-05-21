@@ -6,7 +6,7 @@ import AddToCart from "./AddToCart";
 
 function ProductCard({ product }) {
   return (
-    <div className="w-full h-full rounded-xl shadow-md pb-6 grid grid-rows-[auto_1fr_auto]">
+    <div className="w-full h-full rounded-xl shadow-md pb-6 grid grid-rows-[auto_1fr_auto] bg-white dark:bg-slate-800 dark:text-white">
       <Link href={`/products/${product._id}`}>
         <div className="flex justify-center min-h-30">
           <Image
@@ -33,7 +33,7 @@ function ProductCard({ product }) {
         <p className="py-2 text-lg">Rs. {product.price}</p>
       </div>
       <div className="px-4">
-        <AddToCart />
+        <AddToCart product={product} />
       </div>
     </div>
   );
