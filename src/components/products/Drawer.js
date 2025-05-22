@@ -26,6 +26,9 @@ function ProductsDrawer({
   const router = useRouter();
   const searchParams = useSearchParams();
 
+
+  // yesma hamro brands as array ako hunxa like [acer, dell, smarthones] so talako func le chai brandsfilter vanne state ma hamro brand xa vane filter garxa xaina vane chai brandsfilter ma add garxa 
+
   function handleBrandsFilterChange(brand) {
     setBrandsFilter((prev) =>
       prev.includes(brand)
@@ -33,19 +36,23 @@ function ProductsDrawer({
         : [...prev, brand]
     );
   }
+  // console.log(brandsFilter)
 
   function setFilters() {
+    // url ma naya serach garne params set garxa tyo  ni string ma convert garera 
     const params = new URLSearchParams(searchParams.toString());
     params.set("min", minPrice);
     params.set("max", maxPrice);
     params.set("sort", sort);
-    params.set("brands", brandsFilter.join(","));
+    params.set("brands", brandsFilter.join(",")); // yesle acer,phones garera brands harulai jodxa
     params.set("category", categoryFilter);
+   
 
-    router.push(`?${params.toString()}`);
+    router.push(`?${params.toString()}`); // updated params lai url ma rakhxa
 
     setShowFilters(false);
   }
+// name=&min=1000&max=4995&sort=%7B%22price%22%3A-1%7D&brands=&category= yesari aauxa searchparams ma 
 
   function resetFilter() {
     setBrandsFilter(DEFAULT_BRANDS_FILTER);
@@ -209,6 +216,7 @@ function ProductsDrawer({
                   className="w-4 h-4"
                   checked={brandsFilter.includes(brand)}
                   onChange={() => handleBrandsFilterChange(brand)}
+                  // check ra uncheck gada handlebrandsfilterchange call hunxa ra brand ko value brandsFilter state ko array ma basxa
                 />
                 <label
                   htmlFor={brand}

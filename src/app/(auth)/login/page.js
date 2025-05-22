@@ -8,6 +8,7 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { EMAIL_REGEX } from "@/src/constants/regex";
 import { loginUser } from "@/src/redux/auth/authActions";
 import { useDispatch, useSelector } from "react-redux";
+import { HOME_ROUTE, LOGIN_ROUTE } from "@/src/constants/routes";
 
 function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -29,7 +30,8 @@ function LoginPage() {
   }
 
   useEffect(() => {
-    if (user) return router.push("/");
+    if (user) return router.push(HOME_ROUTE);
+    
 
     if (error)
       toast.error(error, {

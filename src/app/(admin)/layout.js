@@ -14,13 +14,13 @@ function AdminLayout({ children }) {
   const router = useRouter();
 
   useEffect(() => {
-    if (!user) router.push("/"); 
+    if (!user) router.push(LOGIN_ROUTE); 
 // if there is no any logged in user , It redirects the user to the homepage ("/").
 
     // check if logged in user is normal user or admin and merchant and allow only MERCHANT and ADMIN roles
     const isAllowed = allowedAdminRoles(user?.roles);
 
-    if (!isAllowed) router.push("/"); // if user in normal user that is not an admin or merchant it will push to homepage
+    if (!isAllowed) router.push(LOGIN_ROUTE); // if user in normal user that is not an admin or merchant it will push to homepage
   }, [router, user]); //This effect runs every time the router or user changes.
 
   return (

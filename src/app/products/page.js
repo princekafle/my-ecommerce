@@ -13,6 +13,7 @@ export const metadata = {
 };
 
 async function ProductsPage({ searchParams }) {
+  console.log(searchParams)
   const response = await getProducts(await searchParams);
   const brandsResponse = await getBrands();
   const categoriesResponse = await getCategories();

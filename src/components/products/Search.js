@@ -1,6 +1,6 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { IoIosSearch } from "react-icons/io";
 
 function SearchProduct() {
@@ -9,18 +9,19 @@ function SearchProduct() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  function searchProduct() {
+  const searchProduct = useCallback(() => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("name", productName);
+    // yesle url ma http://localhost:3000/products?name=Caliber yesari set grxa
 
     router.push(`?${params.toString()}`);
-  }
+  }, [productName, router, searchParams]);
 
   useEffect(() => {
     if (productName == "") {
       searchProduct();
     }
-  }, [productName]);
+  }, [productName, searchProduct]);
 
   return (
     <div className="max-w-md mx-auto">

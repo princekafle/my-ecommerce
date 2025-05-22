@@ -1,6 +1,7 @@
-import config from "@/src/config";
+import api from "./api";
 import axios from "axios";
-import api from "./api.js";
+import config from "../config";
+import getFormattedParams from "@/src/helpers/formatSearchParams";
 
 async function createProduct(data) {
   return await api.post(`/api/products`, data);
@@ -10,8 +11,12 @@ async function deleteProduct(id) {
   return await api.delete(`/api/products/${id}`);
 }
 
-async function getProducts() {
-  return await axios.get(`${config.apiUrl}/api/products`);
+async function getProducts(searchParams) {
+  const query = getFormattedParams(searchParams);
+
+//  getFormattedParams bata ako query api ma pathaideko so that backend ma pugos ra response diyos vanera 
+
+  return await axios.get(`${config.apiUrl}/api/products?${query}`);
 }
 
 async function getProductByUser() {
@@ -22,6 +27,10 @@ async function getProductById(id) {
   return await axios.get(`${config.apiUrl}/api/products/${id}`);
 }
 
+async function getBrands() {
+  return await axios.get(`${config.apiUrl}/api/products/brands`);
+}
+
 async function getCategories() {
   return await axios.get(`${config.apiUrl}/api/products/categories`);
 }
@@ -30,20 +39,13 @@ async function updateProduct(id, data) {
   return await api.put(`/api/products/${id}`, data);
 }
 
-async function getBrands() {
-  return await axios.get(`${config.apiUrl}/api/products/brands`);
-}
-
-
 export {
   createProduct,
+  deleteProduct,
+  getBrands,
   getCategories,
   getProductById,
   getProductByUser,
   getProducts,
   updateProduct,
-  deleteProduct,
-  getBrands
 };
-
-// yaha hamile jun jun ma authentication chainxa yaniki authToken chainxa tesma api. use gareko xau ra junma chaidaina tesma config wala use garekox xau 

@@ -3,6 +3,7 @@ import hero from "@/src/assets/images/auth-hero.png";
 import bg from "@/src/assets/images/auth-bg.png";
 import Image from "next/image";
 
+
 function AuthLayout({ children }) {
   return (
     <section className="flex justify-center py-20 max-w-screen mx-auto px-10">
