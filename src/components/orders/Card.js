@@ -1,9 +1,9 @@
 import Image from "next/image";
-
+import placeholder from "@/src/assets/images/product-placeholder.jpeg"
 function OrderItemCard({ product, quantity }) {
   return (
     <div className="bg-white border border-gray-200 dark:border-gray-500 rounded-lg p-3 flex items-center gap-5 dark:bg-slate-700">
-      <Image src={product?.imageUrls[0]} alt="" height={64} width={64} />
+      <Image src={product?.imageUrls?.[0] || placeholder} alt="" height={64} width={64} />
       <div>
         <h3 className="font-medium text-lg">{product?.name}</h3>
         <p>

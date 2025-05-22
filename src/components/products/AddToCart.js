@@ -8,7 +8,7 @@ function AddToCart({ product }) {
   const dispatch = useDispatch();
 
   function addProductToCart() {
-    delete product.description;
+    delete product.description; // cart ma add garepaxi descritpion lai hataidinxa reedux state bata 
 
     dispatch(addToCart(product));
 

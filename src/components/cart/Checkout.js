@@ -19,13 +19,24 @@ function Checkout({ products, totalPrice }) {
   function checkoutOrder() {
     setLoading(true);
 
-    createOrder({
-      orderItems: products.map((item) => ({
-        product: item.id,
-        quantity: item.quantity,
-      })),
-      totalPrice,
-    })
+    
+  const orderData = {
+    orderItems: products.map((item) => ({
+      product: item.id,
+      quantity: item.quantity,
+    })),
+    totalPrice,
+  };
+
+  console.log(orderData);
+  createOrder(orderData)
+    // createOrder({
+    //   orderItems: products.map((item) => ({
+    //     product: item.id,
+    //     quantity: item.quantity,
+    //   })),
+    //   totalPrice,
+    // })
       .then(() => {
         toast.success("Order created successfully.", {
           autoClose: 750,

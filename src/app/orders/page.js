@@ -1,5 +1,5 @@
 "use client";
-import { getOrdersByUser } from "@/src/api/orders";
+import { getOrdersByUser} from "@/src/api/order"
 import OrderCard from "@/src/components/orders/Card";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
