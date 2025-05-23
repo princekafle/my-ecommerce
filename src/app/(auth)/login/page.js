@@ -1,18 +1,18 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import { FiEye, FiEyeOff } from "react-icons/fi";
+import Link from "next/link";
+import Spinner from "@/src/components/Spinner";
 import { EMAIL_REGEX } from "@/src/constants/regex";
+import { HOME_ROUTE, REGISTER_ROUTE } from "@/src/constants/routes";
 import { loginUser } from "@/src/redux/auth/authActions";
+import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { HOME_ROUTE, LOGIN_ROUTE } from "@/src/constants/routes";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import PasswordField from "@/src/components/auth/PasswordField";
 
 function LoginPage() {
-  const [showPassword, setShowPassword] = useState(false);
-
   const {
     register,
     handleSubmit,
@@ -31,7 +31,6 @@ function LoginPage() {
 
   useEffect(() => {
     if (user) return router.push(HOME_ROUTE);
-    
 
     if (error)
       toast.error(error, {
@@ -40,17 +39,26 @@ function LoginPage() {
   }, [user, error, router]);
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold text-center mb-5">Login</h1>
-      <form onSubmit={handleSubmit(submitForm)} className="py-6">
-        <div className="pb-1">
-          <label htmlFor="email" className="font-medium">
-            Email Address
+    <section>
+      <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white mb-5">
+        Sign in to your account
+      </h1>
+      <form
+        className="space-y-4 md:space-y-6"
+        onSubmit={handleSubmit(submitForm)}
+      >
+        <div>
+          <label
+            htmlFor="email"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Your email
           </label>
           <input
             type="email"
             id="email"
-            placeholder="Enter email address"
+            className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="name@company.com"
             {...register("email", {
               required: "Email is required.",
               pattern: {
@@ -58,18 +66,18 @@ function LoginPage() {
                 message: "Invalid email address.",
               },
             })}
-            className="w-full border rounded py-1 px-2 my-1"
           />
           <p className="text-red-500 text-sm">{errors.email?.message}</p>
         </div>
-        <div className="pb-1 relative">
-          <label htmlFor="password" className="font-medium">
+        <div className="relative">
+          <label
+            htmlFor="password"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
             Password
           </label>
-          <input
-            type={showPassword ? "text" : "password"}
+          <PasswordField
             id="password"
-            placeholder="Enter password"
             {...register("password", {
               required: "Password is required.",
               minLength: {
@@ -77,27 +85,49 @@ function LoginPage() {
                 message: "Password length must be greater than 6.",
               },
             })}
-            className="w-full border rounded py-1 px-2 my-1"
           />
-          <button
-            type="button"
-            onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-9"
-          >
-            {showPassword ? <FiEye /> : <FiEyeOff />}
-          </button>
           <p className="text-red-500 text-sm">{errors.password?.message}</p>
         </div>
-        <div className="py-4">
-          <input
-            type="submit"
-            disabled={loading}
-            value={loading ? "Submitting..." : "Login"}
-            className="w-full bg-primary hover:opacity-90 text-white py-1 rounded disabled:opacity-80"
-          />
+        <div className="flex items-center justify-between">
+          <div className="flex items-start">
+            <div className="flex items-center h-5">
+              <input id="remember" type="checkbox" className="w-4 h-4" />
+            </div>
+            <div className="ml-3 text-sm">
+              <label
+                htmlFor="remember"
+                className="text-gray-500 dark:text-gray-300"
+              >
+                Remember me
+              </label>
+            </div>
+          </div>
+          <Link
+            href="/forgot-password"
+            className="text-sm font-medium text-primary hover:underline"
+          >
+            Forgot password?
+          </Link>
         </div>
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full text-white bg-primary hover:opacity-90 font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-80"
+        >
+          <span>Sign in</span>
+          {loading && <Spinner className="h-5 w-5 ml-2" />}
+        </button>
+        <p className="text-sm font-light text-gray-700 dark:text-gray-300">
+          Don’t have an account yet?
+          <Link
+            href={REGISTER_ROUTE}
+            className="font-medium text-primary hover:underline ml-2"
+          >
+            Sign up
+          </Link>
+        </p>
       </form>
-    </div>
+    </section>
   );
 }
 

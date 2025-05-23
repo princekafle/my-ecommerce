@@ -4,12 +4,22 @@ async function createOrder(data) {
   return await api.post("/api/orders", data);
 }
 
+
 async function getOrders() {
   return await api.get("/api/orders");
 }
 
-async function getOrdersByUser(userId) {
-  return await api.get(`/api/orders/user/${userId}`);
+async function getOrdersByUser(userId, status) {
+  return await api.get(`/api/orders/user/${userId}?status=${status}`);
 }
 
-export { createOrder, getOrders, getOrdersByUser };
+
+async function checkoutOrder(id, data) {
+  return await api.put(`/api/orders/${id}/checkout`, data);
+}
+
+async function confirmOrder(id, data) {
+  return await api.put(`/api/orders/${id}/confirm`, data);
+}
+
+export { createOrder, getOrders, getOrdersByUser,checkoutOrder,confirmOrder };

@@ -1,4 +1,4 @@
-import { loginUser } from "./authActions";
+import { loginUser, registerUser } from "./authActions";
 
 const { createSlice } = require("@reduxjs/toolkit");
 
@@ -27,6 +27,18 @@ const authSlice = createSlice({
         state.loading = false;
       })
       .addCase(loginUser.rejected, (state, action) => {
+        state.error = action.payload ?? "Something went wrong.";
+        state.loading = false;
+      })
+      .addCase(registerUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.loading = false;
+      })
+      .addCase(registerUser.rejected, (state, action) => {
         state.error = action.payload ?? "Something went wrong.";
         state.loading = false;
       }),
