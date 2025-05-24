@@ -22,4 +22,12 @@ async function confirmOrder(id, data) {
   return await api.put(`/api/orders/${id}/confirm`, data);
 }
 
-export { createOrder, getOrders, getOrdersByUser,checkoutOrder,confirmOrder };
+async function deleteOrder(id) {
+  return await api.delete(`/api/orders/${id}`);
+}
+
+async function updateOrderStatus(id, data) {
+  return await api.put(`/api/orders/${id}/status`, data);
+}
+
+export { createOrder, getOrders, getOrdersByUser,checkoutOrder,confirmOrder, deleteOrder, updateOrderStatus };

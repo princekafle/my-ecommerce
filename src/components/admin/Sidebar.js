@@ -6,9 +6,11 @@ import { usePathname } from "next/navigation";
 import { MdOutlineLocalGroceryStore } from "react-icons/md";
 import {
   DASHBOARD_ROUTE,
+  ORDER_MANAGEMENT_ROUTE,
   PRODUCT_MANAGEMENT_ROUTE,
   USER_MANAGEMENT_ROUTE,
 } from "@/src/constants/routes";
+import { LuPackageOpen } from "react-icons/lu";
 
 const sidebarMenu = [
   {
@@ -22,6 +24,11 @@ const sidebarMenu = [
     icon: (
       <MdOutlineLocalGroceryStore className="w-5 h-5 text-gray-500 dark:text-white" />
     ),
+  },
+  {
+    label: "Order Management",
+    route: ORDER_MANAGEMENT_ROUTE,
+    icon: <LuPackageOpen className="w-5 h-5 text-gray-500 dark:text-white" />,
   },
   {
     label: "User Management",

@@ -1,47 +1,14 @@
 "use client";
-import Image from "next/image";
-import config from "@/src/config";
-import khaltiIcon from "@/src/assets/images/khalti.png";
-import { checkoutOrder } from "@/src/api/order";
-import { useState } from "react";
-import { toast } from "react-toastify";
-import Spinner from "../Spinner";
+
+import KhaltiPayment from "./KhaltiPayment";
+import CashOnDelivery from "./CashOnDelivery";
 
 function ConfirmOrder({ order }) {
-  const [loading, setLoading] = useState(false);
-
-  function initiatePayment() {
-    const orderId = order._id;
-
-    setLoading(true);
-
-    checkoutOrder(orderId, {
-      returnUrl: `${config.appUrl}/orders/${orderId}/payment`,
-      websiteUrl: config.appUrl,
-    })
-      .then((response) => {
-        const data = response.data;
-
-        window.location.href = data.payment_url;
-      })
-      .catch((error) => toast.error(error.response.data, { autoClose: 750 }))
-      .finally(() => setLoading(false));
-  }
-
   return (
-    <button
-      onClick={initiatePayment}
-      type="button"
-      disabled={loading}
-      class="flex items-center gap-2 focus:outline-none text-white bg-[#5E338D] hover:opacity-90 font-medium rounded-lg text-sm px-5 py-2.5 disabled:opacity-80"
-    >
-      Pay Via Khalti
-      {loading ? (
-        <Spinner className="h-5 w-5" />
-      ) : (
-        <Image src={khaltiIcon} alt="khalti" height={20} width={20} />
-      )}
-    </button>
+    <div className="flex gap-3">
+      <CashOnDelivery order={order} />
+      <KhaltiPayment order={order} />
+    </div>
   );
 }
 

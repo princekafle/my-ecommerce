@@ -4,6 +4,7 @@ import { ORDERS_ROUTE } from "@/src/constants/routes";
 import { confirmOrder } from "@/src/api/order";
 import { useEffect, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { BsHypnotize } from "react-icons/bs";
 
 // yo page chai return url wala page ho if payment success vayo avne yo page ma redirect gardinxa hamro api le
 function OrderPaymentPage() {
@@ -33,9 +34,9 @@ function OrderPaymentPage() {
       .finally(() => {
         setLoading(false);
 
-        // setTimeout(() => {
-        //   router.push(`${ORDERS_ROUTE}`);
-        // }, 2500);
+        setTimeout(() => {
+          router.push(`${ORDERS_ROUTE}`);
+        }, 2500);
       });
   }, []);
 

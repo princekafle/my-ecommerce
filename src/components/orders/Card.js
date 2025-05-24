@@ -4,6 +4,7 @@ import {
   ORDER_STATUS_CONFIRMED,
   ORDER_STATUS_PENDING,
 } from "@/src/constants/orderStatus";
+import OrderStatus from "./Status";
 
 function OrderItemCard({ product, quantity }) {
   return (
@@ -16,22 +17,6 @@ function OrderItemCard({ product, quantity }) {
         </p>
       </div>
     </div>
-  );
-}
-
-function OrderStatus({ status }) {
-  if (status == ORDER_STATUS_CONFIRMED) {
-    return (
-      <span className="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-blue-900 dark:text-blue-300 uppercase">
-        {status}
-      </span>
-    );
-  }
-
-  return (
-    <span className="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-red-900 dark:text-red-300 uppercase">
-      {status}
-    </span>
   );
 }
 

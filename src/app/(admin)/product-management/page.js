@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { ROLE_ADMIN } from "@/src/constants/roles";
+import Spinner from "@/src/components/Spinner";
 
 function ProductManagementPage() {
   const [loading, setLoading] = useState(true);
@@ -59,7 +60,13 @@ function ProductManagementPage() {
           Add Product +
         </Link>
       </div>
-      {loading ? <div>Loading...</div> : <ProductsTable products={products} />}
+      {loading ? (
+        <div className="flex justify-center py-10">
+          <Spinner className="h-10 w-10" />
+        </div>
+      ) : (
+        <ProductsTable products={products} />
+      )}
     </section>
   );
 }
