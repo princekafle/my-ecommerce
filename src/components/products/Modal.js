@@ -3,9 +3,9 @@ import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { IoAlertCircleOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
+import Spinner from "../Spinner";
 import { useDispatch } from "react-redux";
 import { setDeleteStatus } from "@/src/redux/product/productSlice";
-import Spinner from "../Spinner";
 
 function DeleteProductModal({
   showModal = false,

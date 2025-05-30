@@ -2,51 +2,44 @@
 import Spinner from "../Spinner";
 import { RxDividerVertical } from "react-icons/rx";
 import { clearCart } from "@/src/redux/cart/cartSlice";
-import { createOrder } from "@/src/api/order";
+import { createOrder } from "@/src/api/orders";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ORDERS_ROUTE } from "@/src/constants/routes";
+import { LOGIN_ROUTE, ORDERS_ROUTE } from "@/src/constants/routes";
 
 function Checkout({ products, totalPrice }) {
   const [loading, setLoading] = useState(false);
+
+  const { user } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
 
   const router = useRouter();
 
   function checkoutOrder() {
+    if (!user) return router.push(LOGIN_ROUTE);
+
     setLoading(true);
 
-    
-  const orderData = {
-    orderItems: products.map((item) => ({
-      product: item.id,
-      quantity: item.quantity,
-    })),
-    totalPrice,
-  };
-
-  console.log(orderData);
-  createOrder(orderData)
-    // createOrder({
-    //   orderItems: products.map((item) => ({
-    //     product: item.id,
-    //     quantity: item.quantity,
-    //   })),
-    //   totalPrice,
-    // })
+    createOrder({
+      orderItems: products.map((item) => ({
+        product: item.id,
+        quantity: item.quantity,
+      })),
+      totalPrice,
+    })
       .then(() => {
+        router.push(ORDERS_ROUTE);
+
         toast.success("Order created successfully.", {
           autoClose: 750,
           onClose: () => {
-            router.push(ORDERS_ROUTE);
             dispatch(clearCart());
           },
         });
       })
-    
       .catch((error) => toast.error(error.response.data, { autoClose: 750 }))
       .finally(() => setLoading(false));
   }

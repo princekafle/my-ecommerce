@@ -8,7 +8,6 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 
 function ForgotPasswordPage() {
-  return <div>ForgotPasswordPage</div>;
   const [loading, setLoading] = useState(false);
 
   const {

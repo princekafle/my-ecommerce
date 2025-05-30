@@ -20,7 +20,7 @@ function DeleteOrderModal({ showModal = false, setShowModal, orderId }) {
         toast.success("Order deleted successfully!", { autoClose: 750 });
         dispatch(setOrderStatus("deleted"));
       })
-      .catch((error) => toast.success(error.response?.data, { autoClose: 750 }))
+      .catch((error) => toast.error(error.response?.data, { autoClose: 750 }))
       .finally(() => {
         setLoading(false);
         setShowModal(false);

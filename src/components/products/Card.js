@@ -27,13 +27,13 @@ function ProductCard({ product }) {
             {product?.brand}
           </span>
         </div>
-        <Link href={`/products/${product._id}`} className="hover:underline">
+        <Link href={`/products/${product.id}`} className="hover:underline">
           <h2 className="text-2xl font-semibold">{product.name}</h2>
         </Link>
         <p className="py-2 text-lg">Rs. {product.price}</p>
       </div>
       <div className="px-4">
-        <AddToCart product={product} />
+        <AddToCart product={product} className="w-full" />
       </div>
     </div>
   );

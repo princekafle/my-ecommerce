@@ -1,14 +1,11 @@
-import { getCategories, getProductById } from "@/src/api/products.js";
-import BackButton from "@/src/app/products/[productId]/_components/BackButton";
+import { getCategories, getProductById } from "@/src/api/products";
+import BackButton from "@/src/components/BackButton";
 import ProductForm from "@/src/components/products/Form";
 
 async function EditProductPage({ params }) {
- const id = (await params).id;
- 
+  const id = (await params).id;
 
   const response = await getProductById(id);
-  //note getproductbyid ma chai ai generated description aaune backend xa so edit by id ma matra ai wala description dekhauxa
- 
 
   const categoriesResponse = await getCategories();
 

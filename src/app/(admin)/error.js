@@ -7,5 +7,5 @@ function ErrorLayout({ error }) {
     </div>
   );
 }
-// yesle admin ko sabai page ma aako error dekhauxa customize way ma
+
 export default ErrorLayout;

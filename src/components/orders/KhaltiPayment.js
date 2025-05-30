@@ -2,7 +2,7 @@ import Image from "next/image";
 import Spinner from "../Spinner";
 import config from "@/src/config";
 import khaltiIcon from "@/src/assets/images/khalti.png";
-import { checkoutOrder } from "@/src/api/order";
+import { checkoutOrder } from "@/src/api/orders";
 import { toast } from "react-toastify";
 import { useState } from "react";
 

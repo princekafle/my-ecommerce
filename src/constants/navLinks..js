@@ -1,45 +1,40 @@
-import { ORDERS_ROUTE } from "./routes";
+import { HOME_ROUTE, ORDERS_ROUTE, PRODUCTS_ROUTE } from "./routes";
 
 const navLinks = [
   {
-    route: "/",
+    route: HOME_ROUTE,
     label: "Home",
     isAuth: false,
   },
   {
-    route: "/about",
-    label: "About",
-    isAuth: false,
-  },
-  {
-    route: "/products",
+    route: PRODUCTS_ROUTE,
     label: "Products",
     isAuth: false,
   },
-   {
+  {
     route: ORDERS_ROUTE,
     label: "Orders",
     isAuth: true,
   },
-  {
-    route: "/news",
-    label: "News",
-    isAuth: true,
-    subMenu: [
-      {
-        route: "/politics",
-        label: "Politics",
-      },
-      {
-        route: "/sports",
-        label: "Sports",
-      },
-      {
-        route: "/education",
-        label: "Education",
-      },
-    ],
-  },
+  // {
+  //   route: "/news",
+  //   label: "News",
+  //   isAuth: true,
+  //   subMenu: [
+  //     {
+  //       route: "/politics",
+  //       label: "Politics",
+  //     },
+  //     {
+  //       route: "/sports",
+  //       label: "Sports",
+  //     },
+  //     {
+  //       route: "/education",
+  //       label: "Education",
+  //     },
+  //   ],
+  // },
   {
     route: "/contact",
     label: "Contact",

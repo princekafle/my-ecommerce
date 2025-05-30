@@ -1,6 +1,6 @@
-import { getCategories } from "@/src/api/products";
-import BackButton from "@/src/app/products/[productId]/_components/BackButton";
+import BackButton from "@/src/components/BackButton";
 import ProductForm from "@/src/components/products/Form";
+import { getCategories } from "@/src/api/products";
 
 async function AddProductPage() {
   const categoriesResponse = await getCategories();
@@ -17,6 +17,5 @@ async function AddProductPage() {
     </section>
   );
 }
-
 
 export default AddProductPage;

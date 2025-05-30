@@ -9,7 +9,15 @@ import OrderStatus from "./Status";
 function OrderItemCard({ product, quantity }) {
   return (
     <div className="bg-white border border-gray-200 dark:border-gray-500 rounded-lg p-3 flex items-center gap-5 dark:bg-slate-700">
-      <Image src={product?.imageUrls[0]} alt="" height={64} width={64} />
+      <div className="w-20 h-20">
+        <Image
+          src={product?.imageUrls[0]}
+          alt=""
+          height={64}
+          width={64}
+          className="w-full h-full rounded-md object-cover"
+        />
+      </div>
       <div>
         <h3 className="font-medium text-lg">{product?.name}</h3>
         <p>

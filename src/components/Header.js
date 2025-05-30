@@ -8,7 +8,7 @@ import logo from "@/src/assets/images/logo.png";
 import navLinks from "../constants/navLinks.";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import { LIGHT_THEME } from "../constants/theme";
-import { CART_ROUTE, LOGIN_ROUTE } from "@/src/constants/routes";
+import { CART_ROUTE, LOGIN_ROUTE } from "../constants/routes";
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 import { toggleTheme } from "../redux/userPreference/userPreferenceSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -36,7 +36,7 @@ function Header() {
               width={100}
             />
             <span className="self-center text-2xl font-semibold whitespace-nowrap">
-              E-Bazaar
+              Kafle Store
             </span>
           </Link>
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
@@ -55,7 +55,7 @@ function Header() {
               <Link href={CART_ROUTE}>
                 <HiOutlineShoppingCart />
               </Link>
-                   <div className="absolute inline-flex items-center justify-center w-4 h-4 text-[0.6rem] text-white bg-red-500 rounded-full top-0 right-0">
+              <div className="absolute inline-flex items-center justify-center w-4 h-4 text-[0.6rem] text-white bg-red-500 rounded-full top-0 right-0">
                 {products.length}
               </div>
             </div>

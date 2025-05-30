@@ -11,12 +11,15 @@ import {
   USER_MANAGEMENT_ROUTE,
 } from "@/src/constants/routes";
 import { LuPackageOpen } from "react-icons/lu";
+import { ROLE_ADMIN, ROLE_MERCHANT } from "@/src/constants/roles";
+import { useSelector } from "react-redux";
 
 const sidebarMenu = [
   {
     label: "Dashboard",
     route: DASHBOARD_ROUTE,
     icon: <GiPieChart className="w-5 h-5 text-gray-500 dark:text-white" />,
+    authRole: ROLE_MERCHANT,
   },
   {
     label: "Product Management",
@@ -24,28 +27,36 @@ const sidebarMenu = [
     icon: (
       <MdOutlineLocalGroceryStore className="w-5 h-5 text-gray-500 dark:text-white" />
     ),
+    authRole: ROLE_MERCHANT,
   },
   {
     label: "Order Management",
     route: ORDER_MANAGEMENT_ROUTE,
     icon: <LuPackageOpen className="w-5 h-5 text-gray-500 dark:text-white" />,
+    authRole: ROLE_ADMIN,
   },
   {
     label: "User Management",
     route: USER_MANAGEMENT_ROUTE,
     icon: <FaUsersCog className="w-5 h-5 text-gray-500 dark:text-white" />,
+    authRole: ROLE_ADMIN,
   },
 ];
 
 function AdminSidebar() {
   const pathname = usePathname();
 
+  const { user } = useSelector((state) => state.auth);
+
   return (
     <aside className="sticky top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 hidden sm:block">
       <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-900">
         <ul className="space-y-2 font-medium">
           {sidebarMenu.map((menu, index) => {
-            const isActive = pathname == menu.route || pathname.startsWith(menu.route);
+            const isActive =
+              pathname == menu.route || pathname.startsWith(menu.route);
+
+            if (!user?.roles.includes(menu.authRole)) return null;
 
             return (
               <li key={index}>

@@ -1,19 +1,23 @@
 "use client";
 
 import { useState } from "react";
-import { FaUserLarge } from "react-icons/fa6";
 import AuthUserPopup from "./AuthUserPopup";
+import Image from "next/image";
+import placeholder from "@/src/assets/images/product-placeholder.jpeg";
 
 function AuthUser({ user }) {
   const [showPopup, setShowPopup] = useState(false);
 
   return (
     <div className="relative">
-      <button
-        className="border-2 rounded-full p-2"
-        onClick={() => setShowPopup(!showPopup)}
-      >
-        <FaUserLarge />
+      <button className="rounded-full border-2 border-primary p-0.5" onClick={() => setShowPopup(!showPopup)}>
+        <Image
+          src={user.profileImageUrl ?? placeholder}
+          alt=""
+          height={32}
+          width={32}
+          className="w-8 h-8 rounded-full"
+        />
       </button>
       {showPopup && <AuthUserPopup user={user} setShowPopup={setShowPopup} />}
     </div>

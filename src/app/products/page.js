@@ -1,19 +1,14 @@
 import { getBrands, getCategories, getProducts } from "@/src/api/products";
 import ProductCard from "@/src/components/products/Card";
-import ProductFilters from "@/src/components/products/Filter";
+import ProductFilters from "@/src/components/products/Filters";
+import LoadMoreProducts from "@/src/components/products/LoadMore";
 import SearchProduct from "@/src/components/products/Search";
 
 export const metadata = {
-  title:"Products"
-  // {
-
-  //   default: "Products", or simply title : "products" vanda pani  products chai title ma append vayera dekhauxa like ebazar|products
-  //   // if default ko satta absolute garyau vane only prodcuts matra aauxa title ma 
-  // }
+  title: "Products",
 };
 
 async function ProductsPage({ searchParams }) {
-  console.log(searchParams)
   const response = await getProducts(await searchParams);
   const brandsResponse = await getBrands();
   const categoriesResponse = await getCategories();
@@ -24,7 +19,7 @@ async function ProductsPage({ searchParams }) {
 
   return (
     <section className="min-h-screen">
-      <div className="grid grid-cols-[1fr_auto_auto] items-center gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_auto] items-center gap-3">
         <h1 className="text-4xl font-semibold dark:text-white">
           Popular products
         </h1>
@@ -42,6 +37,8 @@ async function ProductsPage({ searchParams }) {
           No products found! Please try different keywords.
         </p>
       )}
+
+      <LoadMoreProducts productCount={products.length} />
     </section>
   );
 }

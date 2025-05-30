@@ -1,8 +1,9 @@
 import { PRODUCTS_ROUTE } from "@/src/constants/routes";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 
+const DEFAULT_LIMIT = 10;
 const DEFAULT_BRANDS_FILTER = [];
 const DEFAULT_CATEGORY_FILTER = "";
 const DEFAULT_MAX_PRICE = 100000000;
@@ -17,6 +18,7 @@ function ProductsDrawer({
   brands,
   categories,
 }) {
+  const [limit, setLimit] = useState(DEFAULT_LIMIT);
   const [brandsFilter, setBrandsFilter] = useState(DEFAULT_BRANDS_FILTER);
   const [categoryFilter, setCategoryFilter] = useState(DEFAULT_CATEGORY_FILTER);
   const [maxPrice, setMaxPrice] = useState(DEFAULT_MAX_PRICE);
@@ -26,9 +28,6 @@ function ProductsDrawer({
   const router = useRouter();
   const searchParams = useSearchParams();
 
-
-  // yesma hamro brands as array ako hunxa like [acer, dell, smarthones] so talako func le chai brandsfilter vanne state ma hamro brand xa vane filter garxa xaina vane chai brandsfilter ma add garxa 
-
   function handleBrandsFilterChange(brand) {
     setBrandsFilter((prev) =>
       prev.includes(brand)
@@ -36,23 +35,20 @@ function ProductsDrawer({
         : [...prev, brand]
     );
   }
-  // console.log(brandsFilter)
 
   function setFilters() {
-    // url ma naya serach garne params set garxa tyo  ni string ma convert garera 
     const params = new URLSearchParams(searchParams.toString());
+    params.set("limit", limit);
     params.set("min", minPrice);
     params.set("max", maxPrice);
     params.set("sort", sort);
-    params.set("brands", brandsFilter.join(",")); // yesle acer,phones garera brands harulai jodxa
+    params.set("brands", brandsFilter.join(","));
     params.set("category", categoryFilter);
-   
 
-    router.push(`?${params.toString()}`); // updated params lai url ma rakhxa
+    router.push(`?${params.toString()}`);
 
     setShowFilters(false);
   }
-// name=&min=1000&max=4995&sort=%7B%22price%22%3A-1%7D&brands=&category= yesari aauxa searchparams ma 
 
   function resetFilter() {
     setBrandsFilter(DEFAULT_BRANDS_FILTER);
@@ -64,8 +60,6 @@ function ProductsDrawer({
     router.push(PRODUCTS_ROUTE);
     setShowFilters(false);
   }
-
-  
 
   return (
     <div className={showFilters ? "block" : "hidden"}>
@@ -90,6 +84,24 @@ function ProductsDrawer({
           </button>
         </div>
         <div className="py-4 overflow-y-auto">
+          <div className="pb-4">
+            <label
+              htmlFor="limit"
+              className="font-semibold text-gray-500 dark:text-gray-400 text-sm uppercase inline-block pb-1"
+            >
+              Limit
+            </label>
+            <select
+              id="limit"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              onChange={(e) => setLimit(e.target.value)}
+            >
+              <option value={10}>10</option>
+              <option value={20}>20</option>
+              <option value={50}>50</option>
+              <option value={100}>100</option>
+            </select>
+          </div>
           <div className="pb-4">
             <label
               htmlFor="orderBy"
@@ -216,7 +228,6 @@ function ProductsDrawer({
                   className="w-4 h-4"
                   checked={brandsFilter.includes(brand)}
                   onChange={() => handleBrandsFilterChange(brand)}
-                  // check ra uncheck gada handlebrandsfilterchange call hunxa ra brand ko value brandsFilter state ko array ma basxa
                 />
                 <label
                   htmlFor={brand}

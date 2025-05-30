@@ -7,7 +7,7 @@ import {
   ORDER_STATUS_PENDING,
   ORDER_STATUS_SHIPPED,
 } from "@/src/constants/orderStatus";
-import { getOrdersByUser } from "@/src/api/order";
+import { getOrdersByUser } from "@/src/api/orders";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";

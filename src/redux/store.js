@@ -9,11 +9,6 @@ const persistConfig = {
   storage,
   whitelist: ["auth", "userPreference", "cart"],
 };
-// key: "ebazaar": Save the data in localStorage under the name persist:ebazaar.
-
-// storage: Use localStorage.
-
-// whitelist: Only save these reducers’ state (auth, userPreference, and cart). Others won’t be saved.
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

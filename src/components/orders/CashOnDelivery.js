@@ -1,30 +1,31 @@
 import Spinner from "../Spinner";
+import { ORDERS_ROUTE } from "@/src/constants/routes";
+import { ORDER_STATUS_CONFIRMED } from "@/src/constants/orderStatus";
 import { PiMoneyWavyDuotone } from "react-icons/pi";
-import { confirmOrder } from "@/src/api/order";
+import { confirmOrder } from "@/src/api/orders";
 import { toast } from "react-toastify";
 import { useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 function CashOnDelivery({ order }) {
   const [loading, setLoading] = useState(false);
 
-   
+  const router = useRouter();
 
   function confirmPayment() {
     const orderId = order._id;
 
-
     setLoading(true);
-    // sending payment method cash and status completed to api when clicking on cash on delivery  
+
     confirmOrder(orderId, {
       status: "completed",
       transactionId: crypto.randomUUID(),
       paymentMethod: "cash",
     })
-      .then((response) => {
-        console.log("cash on delivery confirmed");
-        console.log(response.data)
-    
+      .then(() => {
+        router.push(`${ORDERS_ROUTE}?status=${ORDER_STATUS_CONFIRMED}`);
+
+        toast.success("Order confirmed! Payment via cash", { autoClose: 750 });
       })
       .catch((error) => toast.error(error.response.data, { autoClose: 750 }))
       .finally(() => setLoading(false));

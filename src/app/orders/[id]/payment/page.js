@@ -1,19 +1,15 @@
 "use client";
 import Spinner from "@/src/components/Spinner";
 import { ORDERS_ROUTE } from "@/src/constants/routes";
-import { confirmOrder } from "@/src/api/order";
+import { confirmOrder } from "@/src/api/orders";
 import { useEffect, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
-import { BsHypnotize } from "react-icons/bs";
+import { ORDER_STATUS_CONFIRMED } from "@/src/constants/orderStatus";
 
-// yo page chai return url wala page ho if payment success vayo avne yo page ma redirect gardinxa hamro api le
 function OrderPaymentPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  //http://localhost:3000/orders/68305a400b4888ca75bf76fd/payment?pidx=hpMFXSDA4LHNe5KiaCfqci&transaction_id=3TpQALreW8cz8q4gWeyCo6&tidx=3TpQALreW8cz8q4gWeyCo6&txnId=3TpQALreW8cz8q4gWeyCo6&amount=270893&total_amount=270893&mobile=98XXXXX003&status=Completed&purchase_order_id=68305a400b4888ca75bf76fd&purchase_order_name=dcdd6139-9374-4b13-b38a-4e09327eff85
-
-  // yesto aauxa return url so params vaneko chai /http://localhost:3000/orders/68305a400b4888ca75bf76fd/payment part ho ra  searchparmas chai ? paxadi ko ho  bata cahi order ko payment status lina ko lagi use garxau 
   const params = useParams();
   const searchParams = useSearchParams();
 
@@ -24,8 +20,7 @@ function OrderPaymentPage() {
 
   useEffect(() => {
     confirmOrder(params.id, {
-      status: status.toLowerCase(), 
-      // hamile backend ma status completed ma pathayo vane matra response aaune banako xau so lowercase ma convert gareko searchparmas ma aako status i.e Completed lai 
+      status: status.toLowerCase(),
       transactionId,
     })
       .catch((error) => {
@@ -35,9 +30,10 @@ function OrderPaymentPage() {
         setLoading(false);
 
         setTimeout(() => {
-          router.push(`${ORDERS_ROUTE}`);
-        }, 2500);
+          router.push(`${ORDERS_ROUTE}?status=${ORDER_STATUS_CONFIRMED}`);
+        }, 1500);
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -7,6 +7,8 @@ import { createProduct, updateProduct } from "@/src/api/products";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import Spinner from "../Spinner";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { PRODUCT_MANAGEMENT_ROUTE } from "@/src/constants/routes";
 
 function ProductForm({ id, product, categories }) {
   const [loading, setLoading] = useState(false);
@@ -16,6 +18,7 @@ function ProductForm({ id, product, categories }) {
   const { register, handleSubmit, reset } = useForm({
     values: product,
   });
+  const router = useRouter()
 
   function prepareData(data) {
     const formData = new FormData();
@@ -49,6 +52,7 @@ function ProductForm({ id, product, categories }) {
 
         toast.success("Product updated successfully", { autoClose: 750 });
 
+        router.push(`${PRODUCT_MANAGEMENT_ROUTE}`)
         return;
       }
 

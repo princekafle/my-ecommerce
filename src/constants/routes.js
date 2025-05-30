@@ -1,9 +1,10 @@
-export const DASHBOARD_ROUTE = "/dashboard";
 export const CART_ROUTE = "/cart";
-export const ORDERS_ROUTE = "/orders";
-
+export const CONTACT_ROUTE = "/contact";
+export const DASHBOARD_ROUTE = "/dashboard";
 export const HOME_ROUTE = "/";
 export const LOGIN_ROUTE = "/login";
+export const ORDERS_ROUTE = "/orders";
+export const ORDER_MANAGEMENT_ROUTE = "/order-management";
 export const PRODUCTS_ROUTE = "/products";
 export const PRODUCT_MANAGEMENT_ROUTE = "/product-management";
 export const REGISTER_ROUTE = "/register";

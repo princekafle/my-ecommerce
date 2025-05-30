@@ -1,13 +1,12 @@
+import DeleteProductModal from "./Modal";
 import Image from "next/image";
 import Link from "next/link";
+import placeholder from "@/src/assets/images/product-placeholder.jpeg";
+import { BsImage } from "react-icons/bs";
 import { IoIosCog } from "react-icons/io";
 import { IoTrashOutline } from "react-icons/io5";
 import { MdOutlineModeEdit } from "react-icons/md";
-import { BsImage } from "react-icons/bs";
-import placeholder from "@/src/assets/images/product-placeholder.jpeg";
-import DeleteProductModal from "./Modal";
 import { useState } from "react";
-
 
 function ProductsTable({ products }) {
   const [showModal, setShowModal] = useState(false);
@@ -55,17 +54,19 @@ function ProductsTable({ products }) {
               className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200"
             >
               <td className="px-6 py-4">
-                <Image
-                  src={product.imageUrls?.[0] ?? placeholder}
-                  alt={product.name}
-                  height={100}
-                  width={100}
-                  className="h-auto w-12"
-                />
+                <div className="h-14 w-14">
+                  <Image
+                    src={product.imageUrls?.[0] ?? placeholder}
+                    alt={product.name}
+                    height={100}
+                    width={100}
+                    className="h-full w-full object-cover rounded-md"
+                  />
+                </div>
               </td>
               <th
                 scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                className="px-6 py-4 font-medium text-gray-900 dark:text-white"
               >
                 {product.name}
               </th>
@@ -102,6 +103,5 @@ function ProductsTable({ products }) {
     </div>
   );
 }
-
 
 export default ProductsTable;

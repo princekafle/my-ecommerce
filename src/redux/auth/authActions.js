@@ -1,8 +1,6 @@
 import { login, register } from "@/src/api/auth";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-
-// create async thunk le chai thunk action create graxa
 export const loginUser = createAsyncThunk(
   "auth/login",
   async (data, { rejectWithValue }) => {

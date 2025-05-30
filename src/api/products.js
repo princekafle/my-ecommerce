@@ -1,7 +1,7 @@
 import api from "./api";
 import axios from "axios";
 import config from "../config";
-import getFormattedParams from "@/src/helpers/formatSearchParams";
+import getFormattedParams from "../helpers/formatSearchParams";
 
 async function createProduct(data) {
   return await api.post(`/api/products`, data);
@@ -13,8 +13,6 @@ async function deleteProduct(id) {
 
 async function getProducts(searchParams) {
   const query = getFormattedParams(searchParams);
-
-//  getFormattedParams bata ako query api ma pathaideko so that backend ma pugos ra response diyos vanera 
 
   return await axios.get(`${config.apiUrl}/api/products?${query}`);
 }

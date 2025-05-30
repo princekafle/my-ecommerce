@@ -6,16 +6,21 @@ const initialState = {
   user: null,
   error: null,
   loading: false,
+  status: null,
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    logoutUser: () => initialState, // logout garepaxi initial state ma janaxa
+    updateUserData: (state, action) => {
+      state.user = action.payload;
+    },
+    setUserStatus: (state, action) => {
+      state.status = action.payload;
+    },
+    logoutUser: () => initialState,
   },
-  // extrareducer for thunk actions 
-  // three cases for thunk action are : pending (loading), fulilled(success) and rejected(error)
   extraReducers: (builder) =>
     builder
       .addCase(loginUser.pending, (state) => {
@@ -44,6 +49,6 @@ const authSlice = createSlice({
       }),
 });
 
-export const { logoutUser } = authSlice.actions;
+export const { logoutUser, updateUserData, setUserStatus } = authSlice.actions;
 
 export default authSlice.reducer;

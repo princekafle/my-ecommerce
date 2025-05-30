@@ -53,13 +53,15 @@ function CartTable({ products }) {
               className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
             >
               <td className="p-4">
-                <Image
-                  src={product.imageUrls[0] ?? placeholder}
-                  className="w-16 max-w-full max-h-full"
-                  alt={product.name}
-                  height={100}
-                  width={100}
-                />
+                <div className="h-14 w-14">
+                  <Image
+                    src={product.imageUrls[0] ?? placeholder}
+                    className="w-full h-full object-cover rounded-md"
+                    alt={product.name}
+                    height={100}
+                    width={100}
+                  />
+                </div>
               </td>
               <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
                 {product.name}

@@ -1,14 +1,15 @@
 "use client";
 
 import { addToCart } from "@/src/redux/cart/cartSlice";
+import { MdOutlineAddShoppingCart } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
-function AddToCart({ product }) {
+function AddToCart({ product, className }) {
   const dispatch = useDispatch();
 
   function addProductToCart() {
-    delete product.description; // cart ma add garepaxi descritpion lai hataidinxa reedux state bata 
+    delete product.description;
 
     dispatch(addToCart(product));
 
@@ -18,9 +19,10 @@ function AddToCart({ product }) {
   return (
     <button
       onClick={addProductToCart}
-      className="rounded px-4 py-2 w-full bg-primary hover:opacity-90 text-white"
+      className={`rounded px-4 py-2 flex items-center justify-center bg-primary hover:opacity-90 text-white ${className}`}
     >
-      Add to cart
+      <MdOutlineAddShoppingCart className="w-4 h-4 me-2" />
+      <span> Add to cart</span>
     </button>
   );
 }
