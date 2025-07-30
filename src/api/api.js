@@ -6,6 +6,7 @@ import config from "../config";
 const api = axios.create({
   baseURL: config.apiUrl,
 });
+console.log("testing");
 
 api.interceptors.request.use(
   (config) => {
